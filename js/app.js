@@ -29,6 +29,7 @@ City.prototype.getHourlySales = function() {
     this.avgCustomer = hourlyCustomers(this.minCustomer, this.maxCustomer);
     console.log(this.avgCustomer);
     this.salesArray[i] = (Math.floor(this.avgCookies * this.avgCustomer));
+    // could've just used this.salesArray.push instead of salesArray[i]
   }
 }
 
