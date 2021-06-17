@@ -5,12 +5,10 @@ console.log('hello js');
 
 // Store hours of operation
 const storeHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm',];
+
+//------------Global Variable------------//
+const salesDivElem = document.getElementById('salesList');
 let dailyTotal = 0;
-
-
-function hourlyCustomers(minCust, maxCust) {
-  return Math.floor(Math.random() * (maxCust - minCust) + minCust);
-}
 
 //----------Constructor Function -------------//
 function City(name, minCustomer, maxCustomer, avgCookies) {
@@ -24,18 +22,21 @@ function City(name, minCustomer, maxCustomer, avgCookies) {
 
 City.prototype.cityArray = [];
 
+function getRandom(min, max) {
+  console.log(min, max);
+  let randomVariable =  Math.floor(Math.random() * (max-min) + min+1);
+  return randomVariable;
+}
+
 //---------Prototype Methods, only usable by City-----------//
 City.prototype.getHourlySales = function() {
   for (let i = 0; i < storeHours.length; i++) {
-    this.avgCustomer = hourlyCustomers(this.minCustomer, this.maxCustomer);
-    console.log(this.avgCustomer);
+    console.log(this.minCustomer, this.maxCustomer);
+    this.avgCustomer = getRandom(this.minCustomer, this.maxCustomer);
+    console.log("avgCustomer = " + this.avgCustomer);
     this.salesArray[i] = (Math.floor(this.avgCookies * this.avgCustomer));
-    // could've just used this.salesArray.push instead of salesArray[i]
   }
 }
-
-//------------Global Variable------------//
-const salesDivElem = document.getElementById('salesList');
 
 //----------Global Function------------//
 function renderCity() {
