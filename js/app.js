@@ -8,6 +8,7 @@ const storeHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '
 
 //------------Global Variable------------//
 const salesDivElem = document.getElementById('salesList');
+const newLocationFormElem = document.getElementById('newLocationForm');
 let dailyTotal = 0;
 
 //----------Constructor Function -------------//
@@ -22,18 +23,10 @@ function City(name, minCustomer, maxCustomer, avgCookies) {
 
 City.prototype.cityArray = [];
 
-function getRandom(min, max) {
-  console.log(min, max);
-  let randomVariable =  Math.floor(Math.random() * (max-min) + min+1);
-  return randomVariable;
-}
-
 //---------Prototype Methods, only usable by City-----------//
 City.prototype.getHourlySales = function() {
   for (let i = 0; i < storeHours.length; i++) {
-    console.log(this.minCustomer, this.maxCustomer);
-    this.avgCustomer = getRandom(this.minCustomer, this.maxCustomer);
-    console.log("avgCustomer = " + this.avgCustomer);
+    this.avgCustomer = Math.floor(Math.random() * (this.maxCustomer-this.minCustomer)) + this.minCustomer;
     this.salesArray[i] = (Math.floor(this.avgCookies * this.avgCustomer));
   }
 }
@@ -53,6 +46,7 @@ function renderCity() {
   tableElem.appendChild(row1Elem);
   let thElem = document.createElement('th');
   row1Elem.appendChild(thElem);
+    // Prints first row of table as store hours of operation.
   for (let i = 0; i < storeHours.length; i++){
     let thElem = document.createElement('th');
     thElem.textContent = storeHours[i];
@@ -61,6 +55,7 @@ function renderCity() {
   let thTotalElem = document.createElement('th')
   thTotalElem.textContent = 'Daily Location Total';
   row1Elem.appendChild(thTotalElem);
+  // First loop goes through each city, makes a row, prints city name in the first column.
   for (let i = 0; i < City.prototype.cityArray.length; i++) {
     let currentCity = City.prototype.cityArray[i];
     console.log(currentCity);
@@ -68,12 +63,14 @@ function renderCity() {
     tableRowsElem.textContent = currentCity.name;
     tableElem.appendChild(tableRowsElem);
     City.prototype.cityArray[i].getHourlySales();
+    // Second loop goes through each cities salesArray and puts it in the table.
     for (let n = 0; n < currentCity.salesArray.length; n++ ) {
       dailyTotal += currentCity.salesArray[i];
       let dataElem = document.createElement('td');
       dataElem.textContent = currentCity.salesArray[n];
       tableRowsElem.appendChild(dataElem);
       console.log(dailyTotal);
+      // if the loop reaches the last index number, place the total in the last column.
       if (n === currentCity.salesArray.length - 1) {
         const tdTotalElem = document.createElement('td');
         tdTotalElem.textContent = dailyTotal;
@@ -106,12 +103,32 @@ function renderCity() {
   lastRowElem.appendChild(thGrandTotalElem);
 }
 
+//creates new City object from the submitted form
+function handleSubmit(event) {
+  event.preventDefault();
+  let name = event.target.name.value
+  let minCustomer = parseInt(event.target.minCustomer.value);
+  let maxCustomer = parseInt(event.target.maxCustomer.value);
+  let avgCookies = parseInt(event.target.avgCookies.value);
+
+  const newLocation = new City(name, minCustomer, maxCustomer, avgCookies);
+  console.log(newLocation);
+  newLocation.getHourlySales();
+  let tableElem = document.getElementsByTagName('table');
+  // renders a whole new table with new City object.
+  // I could pull out the render city code and make a new function so I can render rows one at a time instead.
+  // maybe there is a way to remove elements in Javascript instead.
+  renderCity();
+}
+
 //----------Declare Cities----------//
-const seattle = new City('Seattle', '23', '65', '6.3');
-const tokyo = new City('Tokyo', '3', '24', '1.2');
-const dubai = new City('Dubai', '11', '38', '3.7');
-const paris = new City('Paris', '20', '38', '2.3');
-const lima = new City('Lima', '2', '16', '4.6');
+const seattle = new City('Seattle', 23, 65, 6.3);
+const tokyo = new City('Tokyo', 3, 24, 1.2);
+const dubai = new City('Dubai', 11, 38, 3.7);
+const paris = new City('Paris', 20, 38, 2.3);
+const lima = new City('Lima', 2, 16, 4.6);
+
+newLocationFormElem.addEventListener('submit', handleSubmit);
 
 //---Call Function---//
 renderCity();

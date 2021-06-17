@@ -15,6 +15,24 @@
         </nav>
       </header>
       <main>
+        <form id="newLocationForm">
+          <fieldset>
+            <legend>Input New Location</legend>
+            <label> Location Name
+              <input name="name" type="text"/>
+            </label>
+            <label> Minimum Customers per Hour
+              <input name="minCustomer" type="number"/>
+            </label>
+            <label> Maximum Customers per Hour
+              <input name="maxCustomer" type="number"/>
+            </label>
+            <label> Average Cookies per Hour
+              <input name="avgCookies" type="number"/>
+            </label>
+          </fieldset>
+          <button type="submit">Submit</button>
+        </form>
         <div id="salesList">
           <!-- generate this from js: -->
           <!-- <article>
