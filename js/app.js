@@ -114,10 +114,7 @@ function handleSubmit(event) {
   const newLocation = new City(name, minCustomer, maxCustomer, avgCookies);
   console.log(newLocation);
   newLocation.getHourlySales();
-  let tableElem = document.getElementsByTagName('table');
-  // renders a whole new table with new City object.
-  // I could pull out the render city code and make a new function so I can render rows one at a time instead.
-  // maybe there is a way to remove elements in Javascript instead.
+  salesDivElem.innerHTML = "";
   renderCity();
 }
 

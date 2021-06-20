@@ -14,19 +14,33 @@ nav {
 
 nav ul li {
   display: inline-block;
+  color: #194350;
   font-size: 1.5em;
-  padding: 30px;
-}
-
-h1 {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 3em;
-  font-weight: bold;
   padding: 20px;
 }
 
+h1 {
+  font-family: 'Playball', cursive;  font-size: 3em;
+  font-weight: bold;
+  color: #194350;
+  padding: 20px;
+}
+
+img {
+  margin: 20px;
+}
+
 form{
+  font-family: Arial, Helvetica, sans-serif;
+  color: #02475E;
   margin: 10px;
+}
+
+fieldset {
+  display: inline;
+  background-color: #EE9595;
+  border: 1px solid black;
+  padding: 10px;
 }
 
 label {
@@ -34,23 +48,33 @@ label {
 }
 
 button {
+  display: block;
   margin: 10px;
 }
 
 article {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #EE9595;
+  color: #02475E;
+  line-height: 1.1em;
+  padding: 10px;
   margin: 20px;
 }
 
 section:nth-child(2) img {
   float: left;
-  margin: 20px;
+  margin: 30px;
 }
 
 h2 {
   font-size: 1.5em;
+  font-family: 'Times New Roman', Times, serif, serif;
+  color: 
 }
 
 table {
+  color: #02475E;
+  background-color: #EE9595;
   margin: 10px;
 }
 
@@ -63,4 +87,10 @@ td {
   text-align: center;
   border: 2px solid black;
   padding: 10px;
+}
+
+footer {
+  color: #194350;
+  text-align: center;
+  bottom: 0;
 }
